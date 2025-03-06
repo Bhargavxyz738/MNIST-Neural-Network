@@ -1,3 +1,6 @@
+# * Copyright (c) 2025 Bhargav
+# * Licensed under the MIT License – see the LICENSE file for details.
+
 import torch
 import matplotlib.pyplot as plt
 import random

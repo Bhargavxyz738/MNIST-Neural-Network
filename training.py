@@ -68,12 +68,7 @@ for epoch in range(epochs):
 
         running_loss += loss.item()
 
-    #print(f"Epoch {epoch+1}/{epochs}, Loss: {running_loss/len(train_loader):.4f}")
-    # Print training and validation loss
     print(f"Epoch {epoch+1}/{epochs}, Training Loss: {running_loss/len(train_loader):.4f}")
-    #print(f"Epoch {epoch+1}/{epochs}, Validation Loss: {val_loss/len(test_loader):.4f}")
-    #print(f"Validation Accuracy: {100 * correct / total:.2f}%")
-
     correct = 0
     total = 0
     val_loss = 0.0
@@ -81,11 +76,9 @@ for epoch in range(epochs):
     model.eval()
     with torch.no_grad():
           for images, labels in test_loader:
-                # Move data to GPU
                images, labels = images.to(device), labels.to(device)
-
-
                outputs = model(images)
+              
          # Calculate the loss for validation set
                loss = criterion(outputs, labels)
                val_loss += loss.item()
@@ -94,9 +87,4 @@ for epoch in range(epochs):
                total += labels.size(0)
                correct += (predicted == labels).sum().item()
                print(f"Epoch {epoch+1}/{epochs}, Validation Loss: {val_loss/len(test_loader):.4f}")
-
-# Print training and validation loss
-   # print(f"Epoch {epoch+1}/{epochs}, Training Loss: {running_loss/len(train_loader):.4f}")
-       # print(f"Epoch {epoch+1}/{epochs}, Validation Loss: {val_loss/len(test_loader):.4f}")
                print(f"Validation Accuracy: {100 * correct / total:.2f}%")
-

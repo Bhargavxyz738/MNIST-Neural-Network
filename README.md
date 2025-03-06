@@ -55,8 +55,8 @@ class SimpleNN(nn.Module):
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/Bhargavxyz738/NLP-number.git
-    cd NLP-number
+    git clone https://github.com/Bhargavxyz738/MNIST-Neural-Network.git
+    cd MNIST-Neural-Network
     ```
 
 2.  **Install the required packages (if you haven't already):**

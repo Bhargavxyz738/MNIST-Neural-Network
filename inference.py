@@ -4,7 +4,7 @@ import random
 from torchvision import datasets, transforms
 import torch.nn as nn
 
-# This is my model arcitecture which was used during training
+# This is the model arcitecture which was used during training.
 class SimpleNN(nn.Module):
     def __init__(self):
         super(SimpleNN, self).__init__()
@@ -20,14 +20,10 @@ class SimpleNN(nn.Module):
         x = self.fc2(x)
         x = self.softmax(x)
         return x
-
-
+        
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
-
-
 model = SimpleNN().to(device)
-
 model.load_state_dict(torch.load("image_recognisation.pth", map_location=device))
 print("Loaded pre-trained model")
 model.eval()
@@ -39,7 +35,6 @@ transforms.Normalize((0.5,), (0.5,))
 ])
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform, download=True)
 
-
 def test_single_image(image, model, device):
     model.eval()
     with torch.no_grad():
@@ -47,10 +42,8 @@ def test_single_image(image, model, device):
        output = model(image)
        _, predicted = torch.max(output, 1)
        confidence = torch.max(output)
-
     return predicted.item(), confidence.item()
-
-
+    
 def visualize_predictions(test_dataset, model, device, num_samples=5):
     fig, axes = plt.subplots(1, num_samples, figsize=(10, 2))
     for i in range(num_samples):
@@ -61,9 +54,5 @@ def visualize_predictions(test_dataset, model, device, num_samples=5):
         axes[i].imshow(image.squeeze(), cmap='gray')
         axes[i].set_title(f"P: {prediction}\nT: {label}\nC: {confidence*100:.2f}%")
         axes[i].axis('off')
-
-
     plt.show()
-
-
 visualize_predictions(test_dataset, model, device)

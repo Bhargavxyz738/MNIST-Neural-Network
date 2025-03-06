@@ -4,17 +4,11 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
-#import torch_xla.core.xla_model as xm
-
-#device = xm.xla_device()
-
-
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 #This will be the neurone
-
 class SimpleNN(nn.Module):
     def __init__(self):
         super(SimpleNN, self).__init__()
@@ -31,9 +25,6 @@ class SimpleNN(nn.Module):
         x = self.softmax(x)
         return x
 
-"""
-Step 3: Prepare the Data
-"""
 # Transform to normalize and convert to tensor
 transform = transforms.Compose([
     transforms.ToTensor(),
@@ -47,9 +38,6 @@ test_dataset = datasets.MNIST(root='./data', train=False, transform=transform, d
 train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 test_loader = DataLoader(dataset=test_dataset, batch_size=64, shuffle=False)
 
-"""
-Step 4: Train the Network
-"""
 # Initialize the model, loss function, and optimizer
 model = SimpleNN().to(device)
 criterion = nn.CrossEntropyLoss()
@@ -64,11 +52,8 @@ for epoch in range(epochs):
     running_loss = 0.0
 
     for images, labels in train_loader:
-    # Move data to GPU
         images, labels = images.to(device), labels.to(device)
 
-
-        # Zero the parameter gradients
         optimizer.zero_grad()
 
         # Forward pass
@@ -88,9 +73,6 @@ for epoch in range(epochs):
     print(f"Epoch {epoch+1}/{epochs}, Training Loss: {running_loss/len(train_loader):.4f}")
     #print(f"Epoch {epoch+1}/{epochs}, Validation Loss: {val_loss/len(test_loader):.4f}")
     #print(f"Validation Accuracy: {100 * correct / total:.2f}%")
-
-
-
 
     correct = 0
     total = 0

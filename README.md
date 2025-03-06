@@ -1,6 +1,6 @@
 # Handwritten Digit Recognition with Neural Network 
 
-[![License: MIT](LICENSE)
+[License: MIT](LICENSE)
 
 This repository contains code for training and testing a simple neural network to recognize handwritten digits using the MNIST dataset.  The project is implemented in PyTorch and demonstrates a basic image classification pipeline.  It includes both training and inference scripts, along with a pre-trained model.
 

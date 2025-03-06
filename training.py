@@ -1,3 +1,6 @@
+# * Copyright (c) 2025 Bhargav
+# * Licensed under the MIT License – see the LICENSE file for details.
+
 import numpy as np
 import torch
 import torch.nn as nn
@@ -8,7 +11,6 @@ from torchvision import datasets, transforms
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
-#This will be the neurone
 class SimpleNN(nn.Module):
     def __init__(self):
         super(SimpleNN, self).__init__()
@@ -47,8 +49,6 @@ epochs = 70
 
 for epoch in range(epochs):
     model.train()
-    #val_loss = 0.0
-
     running_loss = 0.0
 
     for images, labels in train_loader:
